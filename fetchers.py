@@ -49,8 +49,8 @@ def fetch_feed(url, source_name):
                 continue
 
             title = entry.get("title", "No title")
-            url = entry.get("link")
-            if not url:
+            post_url = entry.get("link")
+            if not post_url:
                 continue
 
             published_str = entry.get("published") or entry.get("updated") or entry.get("created")
@@ -58,7 +58,7 @@ def fetch_feed(url, source_name):
                 try:
                     published_dt = datetime(*published_str[:6], tzinfo=timezone.utc)
                     published = published_dt.isoformat()
-                except:
+                except Exception:
                     published = utc_now()
             else:
                 published = utc_now()
@@ -70,7 +70,7 @@ def fetch_feed(url, source_name):
                 "id": post_id,
                 "source": source_name,
                 "title": title,
-                "url": url,
+                "url": post_url,
                 "summary": summary,
                 "published_at": published
             })
