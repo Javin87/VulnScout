@@ -16,10 +16,10 @@ Monitor multiple security sources, filter relevant vulnerability research, elimi
 ## 🎬 Demo
 
 <p align="center">
-  <img src="screenshots/app-demo.gif" alt="VulnScout Demo" width="900">
+  <img src="demo/app-demo.gif" alt="VulnScout Demo" width="900">
 </p>
 <p align="center">
-  <img src="screenshots/demo-2.gif" alt="VulnScout Demo" width="900">
+  <img src="demo/demo-2.gif" alt="VulnScout Demo" width="900">
 </p>
 
 ---
