@@ -10,9 +10,6 @@ from config import (
 )
 from utils import escape_html, escape_url, split_message_by_length
 
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 SOURCE_ICONS = {
     "medium": "📝",
     "twitter": "🐦",
@@ -47,8 +44,7 @@ def send_telegram_message(message, retries=4):
                 url,
                 json=payload,
                 timeout=25,
-                proxies=proxies,
-                verify=False
+                proxies=proxies
             )
             
             if response.status_code in (502, 503, 504):
@@ -74,6 +70,10 @@ def send_telegram_message(message, retries=4):
 
         except requests.exceptions.ConnectTimeout:
             logger.error(f"Connection to Telegram timed out (attempt {attempt+1}).")
+            if attempt < retries - 1:
+                time.sleep(TELEGRAM_RETRY_DELAY * (attempt + 1))
+        except requests.exceptions.SSLError as e:
+            logger.error(f"❌ SSL/certificate error (attempt {attempt+1}): {e}")
             if attempt < retries - 1:
                 time.sleep(TELEGRAM_RETRY_DELAY * (attempt + 1))
         except requests.exceptions.ProxyError as e:
