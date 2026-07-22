@@ -353,9 +353,6 @@ TELEGRAM_CHAT_ID=123456789
 
 # Optional HTTP/SOCKS Proxy
 PROXY=http://127.0.0.1:2080
-
-# Optional RSSHub Instance
-RSSHUB_BASE_URL=https://rsshub.app
 ```
 
 ---
